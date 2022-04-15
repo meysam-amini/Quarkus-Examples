@@ -1,0 +1,42 @@
+  quarkus:
+    banner:
+      enabled: false
+    datasource:
+      db-kind: postgresql
+      username: admin
+      password: password
+      jdbc:
+        url: jdbc:postgresql://localhost:5432/customer
+      devservices:
+        image-name: postgres:14.2
+    hibernate-orm:
+      database:
+        generation: none
+
+  "%dev":
+    quarkus:
+      log:
+        level: INFO
+        category:
+          "meysam":
+            level: DEBUG
+      hibernate-orm:
+        log:
+          sql: true
+      flyway:
+        migrate-at-start: true
+        locations: db/migration,db/testdata
+
+  "%test":
+    quarkus:
+      log:
+        level: INFO
+        category:
+          "meysam":
+            level: DEBUG
+      hibernate-orm:
+        log:
+          sql: true
+      flyway:
+        migrate-at-start: true
+        locations: db/migration,db/testdata
